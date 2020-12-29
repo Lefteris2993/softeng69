@@ -1,0 +1,1 @@
+Data base at '83.212.79.152:5432' (lefto.ml:5432) ,DB name 'softend', User 'team69_admin', password 'team69'.
