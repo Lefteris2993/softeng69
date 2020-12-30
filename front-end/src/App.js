@@ -1,53 +1,25 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Home from "./components/home/home";
+import React from 'react';
+import NavbarMain from './components/navbarmain/navbarmain';
+import Login from './components/login/login';
+import Startheader from './components/startheader/startheader';
+import './App.scss';
 
-export default function App() {
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={};
+  }
+  render(){
   return (
-    <Router>
-      <div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav> */}
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+    <div className="root-container">
+      <NavbarMain />
+      <div className="login-container">
+       <Login />
       </div>
-    </Router>
+     
+    </div>
   );
+  }
 }
 
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
+export default App;

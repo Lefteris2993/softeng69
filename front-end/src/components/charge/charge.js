@@ -1,14 +1,13 @@
 import React from "react";
-import "./home.scss"
 
-class Home extends React.Component {
+class Charge extends React.Component {
     render () {
         return (
             <p>
-                WELLCOME HOME!
+                PLUG IN YOUR CAR 
             </p>
         )
     }
 }
 
-export default Home;
+export default Charge;
