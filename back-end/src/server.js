@@ -19,8 +19,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 const TestRouter = require('./routes/TestRouter');
+const LoginRouter = require('./routes/login');
+const LogoutRouter = require('./routes/logout');
+const AdminRouter = require('./routes/admin');
 
 app.use('/test', TestRouter);
+app.use('/evcharge/api/login', LoginRouter);
+app.use('/evcharge/api/logout', LogoutRouter);
+app.use('/evcharge/api/admin', AdminRouter);
 
 
 var httpsServer = https.createServer(options, app);
