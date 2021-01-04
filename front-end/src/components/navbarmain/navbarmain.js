@@ -1,12 +1,12 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+// import {
+//     BrowserRouter as Router,
+//     Switch,
+//     Route
+// } from "react-router-dom";
 import { MenuItems } from "./MenuItems";
-import { Logoutbutton } from "../logoutbutton/logoutbutton";
-import Charge from "../charge/charge"
+import  Logoutbutton  from "../logoutbutton/logoutbutton";
+// import Charge from "../charge/charge"
 import './navbarmain.scss'
 
 class NavbarMain extends React.Component {
@@ -28,7 +28,7 @@ class NavbarMain extends React.Component {
                         )
                     })}
                 </ul>
-                <Logoutbutton>Logout</Logoutbutton>
+                <Logoutbutton />
                 {/* <Router>
                     <div>
                         <Switch>

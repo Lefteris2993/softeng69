@@ -18,11 +18,5 @@ export const MenuItems = [
         title: 'Statistics',
         url: 'stats',
         cName: 'nav-links'
-    },
-    {
-        title: 'Logout',
-        url: 'logout',
-        cName: 'nav-links'
     }
-
 ]

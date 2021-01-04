@@ -1,7 +1,9 @@
 import React from 'react';
 import NavbarMain from './components/navbarmain/navbarmain';
 import Login from './components/login/login';
-import Startheader from './components/startheader/startheader';
+//import {About} from './components/about/about';
+//import Startheader from './components/startheader/startheader';
+//import Charge from './components/charge/charge';
 import './App.scss';
 
 class App extends React.Component {

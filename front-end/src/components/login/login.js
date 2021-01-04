@@ -1,6 +1,14 @@
 import React from "react";
 import "./login.scss";
 import { authenticateUser } from "../../api";
+import qs from "querystring";
+import axios from "axios";
+
+//var myStorage = window.sessionStorage;
+sessionStorage.setItem('token', 'null');
+
+// Get saved data from sessionStorage
+//let data = sessionStorage.getItem('key');
 
 class Login extends React.Component {
   constructor(props) {
@@ -27,7 +35,7 @@ class Login extends React.Component {
       let newArr = [];
 
       for (let err of prevState.errors) {
-        if (elm != err.elm) {
+        if (elm !== err.elm) {
           newArr.push(err);
         }
       }
@@ -46,18 +54,18 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     //make sure we got username and pswd
-    
-    if (this.state.username == "") {
+
+    if (this.state.username === "") {
       this.showValidationErr("username", "Username Cannot be empty!");
     }
-    if (this.state.password == "") {
+    if (this.state.password === "") {
       this.showValidationErr("password", "Password Cannot be empty!");
     }
 
     //now send to backend
     this.setState({ autherror: null });
-    if (this.state.password != "" && this.state.username != "") {
-      alert('A name was submitted: ' + this.state.username +this.state.password);
+    if (this.state.password !== "" && this.state.username !== "") {
+      alert('A name was submitted: ' + this.state.username + this.state.password);
       this.setState({ token: null });
       let reqObj = {
         username: this.state.username,
@@ -65,14 +73,19 @@ class Login extends React.Component {
       };
       authenticateUser(reqObj)
         .then(json => {
-          setTimeout(() => {
-            this.setState({ token: json.data.id });
-          }, 0);
+          //alert("Response: " + qs.stringify(json.data));
+          var s = qs.stringify(json.data);
+           var parts = s.split('='); // split the string with these characters
+          var t=parts[1];
+          sessionStorage.setItem('token',t);
+          //axios.defaults.headers.post['X-OBSERVATORY-AUTH'] = sessionStorage.getItem('token');
+          //alert('token: ' + sessionStorage.getItem('token'));
         })
         .catch(err => {
           this.setState({ autherror: err.error })
         });
     }
+    //alert('token: ' + sessionStorage.getItem('token'));
     //event.preventDefault();
   }
 
@@ -83,10 +96,10 @@ class Login extends React.Component {
     //Loop and find which ones has the error
     for (let err of this.state.errors) {
       //Assign the validation error message 
-      if (err.elm == "username") {
+      if (err.elm === "username") {
         usernameErr = err.msg;
       }
-      if (err.elm == "password") {
+      if (err.elm === "password") {
         passwordErr = err.msg;
       }
     }
@@ -130,7 +143,7 @@ class Login extends React.Component {
             .handleSubmit}>Login</button>
       </div>
 
-    );    
+    );
   }
 }
 

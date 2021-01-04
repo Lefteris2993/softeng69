@@ -1,11 +1,26 @@
 import React from "react";
+import "./charge.scss";
 
 class Charge extends React.Component {
-    render () {
+    constructor(props) {
+        super(props);
+        this.state = { vehicle: '', method: '' };
+        this.handleChargePress = this.handleChargePress.bind(this);
+    }
+    handleChargePress(event){
+
+    }
+    render() {
         return (
-            <p>
-                PLUG IN YOUR CAR 
-            </p>
+            <div className="outer-container">
+                Select your vehicle
+                Pick a charging method
+                <button
+                    type="button"
+                    className="charge-btn"
+                    onClick={this
+                        .handleChargePress}>Charge now!</button>
+            </div>
         )
     }
 }
