@@ -8,7 +8,7 @@ router.route('/').post((req, res) => {
     const password = req.body.password;
     const token = crypto.randomBytes(16).toString('hex');
 
-    console.log(req.headers);
+    console.log(req.body);
 
     const query = {
         text: 'select * from login($1,$2,$3)',
@@ -20,8 +20,7 @@ router.route('/').post((req, res) => {
             errorHandler(err, res);
         } else {
             res.status(200).json({ 
-                token: reply.rows[0]['token'],
-                isAdmin: reply.rows[0]['isAdmin']
+                token: reply.rows[0]['token']
             });
         }
     });
