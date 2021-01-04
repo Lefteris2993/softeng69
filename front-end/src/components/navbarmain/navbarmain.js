@@ -14,8 +14,8 @@ class NavbarMain extends React.Component {
 
     render() {
         return (
-
             <nav className="NavbarItems">
+                {console.log(sessionStorage)}
                 <h1 className="navbar-logo"><i className="fas fa-plug">  Eos</i></h1>
                 <ul className='nav-menu'>
                     {MenuItems.map((item, index) => {

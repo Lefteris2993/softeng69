@@ -13,6 +13,7 @@ class Charge extends React.Component {
     render() {
         return (
             <div className="outer-container">
+                {console.log(sessionStorage)}
                 Select your vehicle
                 Pick a charging method
                 <button

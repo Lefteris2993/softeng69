@@ -1,28 +1,38 @@
 import React from 'react'
 import './logoutbutton.scss'
-import {logoutUser} from "../../api";
+import config from "../../config";
+import axios from "axios";
+import { Redirect } from 'react-router-dom';
 
 
 class Logoutbutton extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {logouterror:null};
+        this.state = {logouterror:null, redirect: false};
         this.handleLogout = this.handleLogout.bind(this);
+        this.renderRedirect = this.renderRedirect.bind(this);
     }
     handleLogout(event) {
-        logoutUser()
-        .then((res) => {
-            if(res.ok){
-                alert("Successful logout");
-            }
-            else{
-                alert("Something went wrong! " + res.status);
+        axios({
+            method: 'post',
+            url: config.apiUrl + '/logout',
+            headers: {'x-observatory-auth': sessionStorage.getItem('token')}
+          }).then( res => {
+            console.log(res);
+            if(res.status === 200){
+                //alert("Successful logout");
+                sessionStorage.removeItem('token');
+                this.setState({ redirect: true });
             }
         })
-        .catch(err => {
-          this.setState({ logouterror: err.error })
-        });
+        
     }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+          return <Redirect to='/' />;
+        }
+      }
 
     render() {
 
@@ -33,6 +43,7 @@ class Logoutbutton extends React.Component {
                 className="logout-btn btn--primary btn--medium" 
                 onClick={this
                 .handleLogout}>Logout</button >
+                {this.renderRedirect()}
             </div>
         );
     }

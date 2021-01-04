@@ -1,22 +1,25 @@
 import React from "react";
 import "./login.scss";
-import { authenticateUser } from "../../api";
-import qs from "querystring";
+import config from "../../config";
 import axios from "axios";
-
-//var myStorage = window.sessionStorage;
-sessionStorage.setItem('token', 'null');
-
-// Get saved data from sessionStorage
-//let data = sessionStorage.getItem('key');
+import qs from "querystring";
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '', token: null, autherror: null, errors: [] };
+    this.state = {
+      username: '',
+      password: '',
+      errors: [],
+      redirect: false
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   showValidationErr(elm, msg) {
@@ -42,6 +45,7 @@ class Login extends React.Component {
       return { errors: newArr };
     });
   }
+
   onUsernameChange(event) {
     this.setState({ username: event.target.value });
     this.clearValidationErr("username");
@@ -52,9 +56,11 @@ class Login extends React.Component {
     this.clearValidationErr("password");
   }
 
-  handleSubmit(event) {
-    //make sure we got username and pswd
+  //handleChange (event) {
+  //    this.setState({[event.target.name]: event.target.value});
+  //}
 
+  handleSubmit(event) {
     if (this.state.username === "") {
       this.showValidationErr("username", "Username Cannot be empty!");
     }
@@ -62,31 +68,28 @@ class Login extends React.Component {
       this.showValidationErr("password", "Password Cannot be empty!");
     }
 
-    //now send to backend
-    this.setState({ autherror: null });
     if (this.state.password !== "" && this.state.username !== "") {
-      alert('A name was submitted: ' + this.state.username + this.state.password);
-      this.setState({ token: null });
-      let reqObj = {
-        username: this.state.username,
-        password: this.state.password
-      };
-      authenticateUser(reqObj)
-        .then(json => {
-          //alert("Response: " + qs.stringify(json.data));
-          var s = qs.stringify(json.data);
-           var parts = s.split('='); // split the string with these characters
-          var t=parts[1];
-          sessionStorage.setItem('token',t);
-          //axios.defaults.headers.post['X-OBSERVATORY-AUTH'] = sessionStorage.getItem('token');
-          //alert('token: ' + sessionStorage.getItem('token'));
+      axios({
+        method: 'post',
+        url: config.apiUrl + '/login',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: qs.stringify({
+          username: this.state.username,
+          password: this.state.password
         })
-        .catch(err => {
-          this.setState({ autherror: err.error })
-        });
+      }).then(reply => {
+        console.log(reply.data);
+        sessionStorage.setItem('token', reply.data.token);
+        this.setState({ redirect: true });
+      })
     }
-    //alert('token: ' + sessionStorage.getItem('token'));
-    //event.preventDefault();
+    event.preventDefault();
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/home' />;
+    }
   }
 
   render() {
@@ -103,7 +106,6 @@ class Login extends React.Component {
         passwordErr = err.msg;
       }
     }
-
     return (
       <div className="Login">
         <div className="input-group">
@@ -135,15 +137,15 @@ class Login extends React.Component {
             : ""}
           </small>
         </div>
-
         <button
           type="button"
           className="login-btn"
           onClick={this
             .handleSubmit}>Login</button>
+        {this.renderRedirect()}
       </div>
 
-    );
+    )
   }
 }
 

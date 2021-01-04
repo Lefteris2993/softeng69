@@ -8,7 +8,7 @@ router.route('/').post((req, res) => {
     const password = req.body.password;
     const token = crypto.randomBytes(16).toString('hex');
 
-    console.log(req.body);
+    console.log("1");
 
     const query = {
         text: 'select * from login($1,$2,$3)',
