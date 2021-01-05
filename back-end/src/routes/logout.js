@@ -3,12 +3,19 @@ const { client } = require('../dbconfig');
 const { errorHandler } = require('../errorHandler');
 
 router.route('/').post((req, res) => {
+    console.log("2");
     const token = req.headers['x-observatory-auth'];
+    console.log(token)
     const query = {
-        text: 'update users set token=null where token=($1)',
+        text: 'update users set token=null where users.token=$1',
         values: [token]
     }
 
+    if (token === undefined) {
+        res.status(418).send('undifined token');
+        return;
+    }
+    
     client.query(query, (err, reply) => {
         if (err) {
             errorHandler(err, res);
