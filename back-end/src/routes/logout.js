@@ -7,10 +7,15 @@ router.route('/').post((req, res) => {
     const token = req.headers['x-observatory-auth'];
     console.log(token)
     const query = {
-        text: 'update users set token=null where token=($1)',
+        text: 'update users set token=null where users.token=$1',
         values: [token]
     }
 
+    if (token === undefined) {
+        res.status(418).send('undifined token');
+        return;
+    }
+    
     client.query(query, (err, reply) => {
         if (err) {
             errorHandler(err, res);
