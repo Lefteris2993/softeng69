@@ -1,31 +1,43 @@
 import React from 'react'
 import './logoutbutton.scss'
+import config from "../../config";
+import axios from "axios";
 
-const STYLES = [
-    'btn--primary',
-    'btn--outline'
-]
 
-const SIZES = [
-    'btn--medium',
-    'btn--large'
-]
+class Logoutbutton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {logouterror:null};
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+    handleLogout(event) {
+        axios({
+            method: 'post',
+            url: config.apiUrl + '/logout',
+            headers: {'x-observatory-auth': localStorage.getItem('token')}
+          }).then( res => {
+            console.log(res);
+            if(res.status === 200){
+                //alert("Successful logout");
+                this.props.handleLogout();
+                console.log(this.state);
+            }
+        })
+        
+    }
 
-export const Logoutbutton = ({
-    children,
-    type,
-    onClick,
-    buttonStyle,
-    buttonSize
-}) => {
+    render() {
 
-    const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0]
-
-    const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0]
-
-    return (
-        <button className={`btn ${checkButtonStyle} ${checkButtonSize}`} onClick={onClick} type={type}>
-            {children}
-        </button>
-    )
+        return (
+            <div className="Logout">
+                <button 
+                type="button" 
+                className="logout-btn btn--primary btn--medium" 
+                onClick={this
+                .handleLogout}>Logout</button >
+            </div>
+        );
+    }
 }
+
+export default Logoutbutton;
