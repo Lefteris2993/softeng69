@@ -14,6 +14,7 @@ router.route('/usermod/:username/:password').post((req, res) => {
     }
 
     client.query(query, (err, reply) => {
+        console.log(reply);
         if (err) {
             errorHandler(err, res);
         } else {
@@ -27,18 +28,19 @@ router.route('/users/:username').get((req, res) => {
     const username = req.params.username;
 
     const query = {
-        text: 'select * get_user($1,$2)',
+        text: 'select * from get_user($1,$2)',
         values: [username, token]
     }
 
     client.query(query, (err, reply) => {
+        console.log(reply);
         if (err) {
             errorHandler(err, res);
         } else {
             if (reply.rowCount < 1) {
                 res.status(403).send('No Data');
             } else {
-                res.status(200).json(reply.rows);
+                res.status(200).json(reply.rows[0]);
             }
         }
     })
