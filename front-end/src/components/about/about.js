@@ -6,7 +6,7 @@ export const About = ({
     children
 }) => {
     return (
-        <div className="outer-container" >
+        <div >
             {/* {children} */}
             <img src={logo} alt="Logo" />
             <div className="about-us-text">

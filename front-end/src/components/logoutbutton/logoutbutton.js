@@ -2,15 +2,13 @@ import React from 'react'
 import './logoutbutton.scss'
 import config from "../../config";
 import axios from "axios";
-import { Redirect } from 'react-router-dom';
 
 
 class Logoutbutton extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {logouterror:null, redirect: false};
+        this.state = {logouterror:null};
         this.handleLogout = this.handleLogout.bind(this);
-        this.renderRedirect = this.renderRedirect.bind(this);
     }
     handleLogout(event) {
         axios({
@@ -21,18 +19,12 @@ class Logoutbutton extends React.Component {
             console.log(res);
             if(res.status === 200){
                 //alert("Successful logout");
-                sessionStorage.removeItem('token');
-                this.setState({ redirect: true });
+                this.props.handleLogout();
+                console.log(this.state);
             }
         })
         
     }
-
-    renderRedirect = () => {
-        if (this.state.redirect) {
-          return <Redirect to='/' />;
-        }
-      }
 
     render() {
 
@@ -43,7 +35,6 @@ class Logoutbutton extends React.Component {
                 className="logout-btn btn--primary btn--medium" 
                 onClick={this
                 .handleLogout}>Logout</button >
-                {this.renderRedirect()}
             </div>
         );
     }

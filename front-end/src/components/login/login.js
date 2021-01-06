@@ -3,7 +3,6 @@ import "./login.scss";
 import config from "../../config";
 import axios from "axios";
 import qs from "querystring";
-import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
 
@@ -58,6 +57,7 @@ class Login extends React.Component {
 
   //handleChange (event) {
   //    this.setState({[event.target.name]: event.target.value});
+  //    this.clearValidationErr(event.target.name);
   //}
 
   handleSubmit(event) {
@@ -70,7 +70,7 @@ class Login extends React.Component {
 
     if (this.state.password !== "" && this.state.username !== "") {
       axios({
-        method: 'post',
+        method : 'post',
         url: config.apiUrl + '/login',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: qs.stringify({
@@ -79,7 +79,8 @@ class Login extends React.Component {
         })
       }).then(reply => {
         console.log(reply.data);
-        sessionStorage.setItem('token', reply.data.token);
+        localStorage.setItem('token', reply.data.token);
+        localStorage.setItem('isAdmin', reply.data.isAdmin);
         this.setState({ redirect: true });
       })
     }
@@ -88,9 +89,10 @@ class Login extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/home' />;
+      this.props.handleLogin()
     }
   }
+
 
   render() {
 
