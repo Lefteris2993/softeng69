@@ -1,14 +1,15 @@
 - Data base at '83.212.79.152:5432' (lefto.ml:5432) ,DB name 'softeng', User 'team69_admin', password 'team69'.
 
-- to run some file to DB 'psql -f something.sql softeng team69_admin -h lefto.ml'
+- to run some file to DB 'psql softeng team69_admin -h lefto.ml -f something.sql'
 
-every function must raise exeptions
+every function must raise exeptions.
+format of dates should be YYYY-MM-DD
 
-- login(name, pass, token) => (token, isAdmin) //DONE
-- authenticate(token) => isAdmin // NOT NEEDED
-- healthcheck(token) => ? (for healthckeck perposes) // DONE
-- usermod(usename,password,token) => VOID //DONE
-- get_user(username,token) => user staf //DONE
-- resetsessions(token) ?    //
-- sessionsupd(?) ?          // only these 2 remain for admin and we are GGs
+-poireq(id,from,to,token)->(2a. ekfonisi eos NUM)
+-chargingsessios(poiID,token)->(2a.List)
+-stareq(id,from,to,token)->same
+-sessiossummary(sesID,token)->same
+-vehrep()...
+-vehiclechargingsessios()...
+-provreq(...) -> 2d.
 
