@@ -1,13 +1,11 @@
 import React from 'react';
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route
-// } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import { MenuItems } from "./MenuItems";
 import  Logoutbutton  from "../logoutbutton/logoutbutton";
 // import Charge from "../charge/charge"
 import './navbarmain.scss'
+
+import styles from './navbarmain.scss'
 
 class NavbarMain extends React.Component {
     constructor(props) {
@@ -17,23 +15,19 @@ class NavbarMain extends React.Component {
     render() {
         return (
             <nav className="NavbarItems">
+                {console.log(this.props)}
                 <h1 className="navbar-logo"><i className="fas fa-plug">  Eos</i></h1>
                 {this.props.loggedIn?
                 <div>
                     <ul className='nav-menu'>
-                        {this.props.isAdmin?
+                        {this.props.isAdmin &&
                         <li>
-                            <a className='nav-links' href='admin'>
-                                Admin
-                            </a>
-                        </li>:
-                        <li></li>}
+                            <NavLink className='nav-links' to={`/admin`}>Admin</NavLink>
+                        </li>}
                         {MenuItems.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a className={item.cName} href={item.url}>
-                                        {item.title}
-                                    </a>
+                                    <NavLink className="nav-links" to={`/${item.url}`}>{item.title}</NavLink>
                                 </li>
                             )
                         })}
