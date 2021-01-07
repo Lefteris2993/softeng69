@@ -110,6 +110,7 @@ class Login extends React.Component {
     }
     return (
       <div className="Login">
+        <form onSubmit={this.handleSubmit}>
         <div className="input-group">
           <label htmlFor="username">Username</label>
           <input
@@ -140,11 +141,10 @@ class Login extends React.Component {
           </small>
         </div>
         <button
-          type="button"
-          className="login-btn"
-          onClick={this
-            .handleSubmit}>Login</button>
+          type="submit"
+          className="login-btn">Login</button>
         {this.renderRedirect()}
+        </form>
       </div>
 
     )

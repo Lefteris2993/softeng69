@@ -14,7 +14,7 @@ class Logoutbutton extends React.Component {
         axios({
             method: 'post',
             url: config.apiUrl + '/logout',
-            headers: {'x-observatory-auth': sessionStorage.getItem('token')}
+            headers: {'x-observatory-auth': localStorage.getItem('token')}
           }).then( res => {
             console.log(res);
             if(res.status === 200){
