@@ -19,9 +19,11 @@ class App extends React.Component {
     } else {
       l = true;
     }
-    if(a==='undefined') {
+    if(a==='undefined'||a==='false') {
       a = false;
-    } 
+    } else {
+      a = true;
+    }
     this.state = {
       loggedIn: l,
       isAdmin: a,
@@ -48,7 +50,10 @@ class App extends React.Component {
     return (
       <div className="root-container">
         <Router>
-          <NavbarMain handleLogout={this.handleLogout} loggedIn={this.state.loggedIn} isAdmin={this.state.isAdmin}/>
+          <NavbarMain 
+            handleLogout={this.handleLogout} 
+            loggedIn={this.state.loggedIn} 
+            isAdmin={this.state.isAdmin}/>
           <div className="main-container">
             <Main 
               token={this.state.token}
