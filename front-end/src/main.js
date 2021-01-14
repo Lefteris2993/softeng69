@@ -7,6 +7,7 @@ import {
 import Login from './components/login/login';
 import { About } from './components/about/about';
 import Charge from './components/charge/charge';
+import Bill from './components/periodic_bill/bill';
 
 
 class Main extends React.Component {
@@ -20,6 +21,10 @@ class Main extends React.Component {
                     <Route exact path="/charge"
                         token={this.props.token}
                         component={Charge} 
+                    />
+                    <Route exact path="/bill"
+                        token={this.props.token}
+                        component={Bill} 
                     />
                     </>
                     :

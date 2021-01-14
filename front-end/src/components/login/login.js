@@ -55,11 +55,6 @@ class Login extends React.Component {
     this.clearValidationErr("password");
   }
 
-  //handleChange (event) {
-  //    this.setState({[event.target.name]: event.target.value});
-  //    this.clearValidationErr(event.target.name);
-  //}
-
   handleSubmit(event) {
     if (this.state.username === "") {
       this.showValidationErr("username", "Username Cannot be empty!");
