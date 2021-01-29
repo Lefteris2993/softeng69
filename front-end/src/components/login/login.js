@@ -145,10 +145,9 @@ class Login extends React.Component {
           </small>
         </div>
         <button
-          type="button"
+          type="submit"
           className="login-btn"
-          onClick={this
-            .handleSubmit}>Login</button>
+        >Login</button>
         {this.renderRedirect()}
         </form>
       </div>

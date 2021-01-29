@@ -22,11 +22,13 @@ const TestRouter = require('./routes/TestRouter');
 const LoginRouter = require('./routes/login');
 const LogoutRouter = require('./routes/logout');
 const AdminRouter = require('./routes/admin');
+const Checkout = require('./routes/checkout');
 
 app.use('/test', TestRouter);
 app.use('/evcharge/api/login', LoginRouter);
 app.use('/evcharge/api/logout', LogoutRouter);
 app.use('/evcharge/api/admin', AdminRouter);
+app.use('/evcharge/api/checkout', Checkout);
 
 
 var httpsServer = https.createServer(options, app);

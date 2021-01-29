@@ -1,5 +1,11 @@
 import React from "react";
 import "./charge.scss";
+import CardPayment from "./cardpayment"
+
+const dummy = {
+    name: 'charging program A',
+    price: 50.00
+}
 
 class Charge extends React.Component {
     constructor(props) {
@@ -13,14 +19,7 @@ class Charge extends React.Component {
     render() {
         return (
             <div className="outer-container">
-                {console.log(sessionStorage)}
-                Select your vehicle
-                Pick a charging method
-                <button
-                    type="button"
-                    className="charge-btn"
-                    onClick={this
-                        .handleChargePress}>Charge now!</button>
+                <CardPayment product={dummy}/>
             </div>
         )
     }
