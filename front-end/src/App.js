@@ -23,7 +23,7 @@ class App extends React.Component {
       a = false;
     } 
     this.state = {
-      loggedIn: l,
+      loggedIn: true,
       isAdmin: a,
       token: t
     };

@@ -1,0 +1,161 @@
+
+.page {
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 11;
+     padding-top: 30;
+     padding-left:60;
+     padding-right:60;
+     line-height: 1.5;
+     display: flex;
+     flex-direction: column;
+     max-width: 100em;
+     min-width: 65em;
+     box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
+     border-radius: 67px;
+     padding: 24px;
+ }
+
+ .bill-page{
+    display:flex; flex-direction:row;
+ }
+.main-logo  {
+     width: 74;
+     height: 66;
+     font-size: 3rem;
+     color: rgb(90, 83, 226);
+     justify-self: start;
+     margin-left: 20px;
+     cursor: pointer;
+ }
+
+
+ //////title
+.titleContainer{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: 'row';
+     margin-top: 24;
+ }
+
+.reportTitle{
+     color: '#61dafb';
+     letter-spacing: 4;
+     font-size: 2rem;
+     text-align: 'center';
+     text-transform: 'uppercase';
+ }
+//////
+
+//////date and receiver
+.invoiceDateContainer {
+     
+     font-size: 1.2rem;
+     flex-Direction: 'row';
+     justify-Content: 'flex-end';
+ }
+
+.label {
+    padding-top: 2cm;
+     font-style: italic;
+     font-weight: bold;
+     width: 60;
+ }
+
+.headerContainer {
+     margin-Top: 36;
+ }
+.billTo {
+     margin-Top: 20;
+     padding-Bottom: 3;
+     font-size: 1.2rem;
+     flex-Direction: 'row';
+     justify-Content: 'flex-end';
+     font-style: italic;
+     font-weight: bold;
+     width: 60;
+ }
+//////
+
+/////table of contents
+ .bill-table{
+     padding-top: 2cm;
+ }
+ .body-elem{
+    width: 7cm;
+    text-align: center;
+ }
+
+.row-headers{
+    width: 5cm;
+}
+
+.table-headers{
+    background-color: rgb(103, 67, 202);
+}
+
+ .body-footer{
+    background-color:  rgb(178, 164, 196);
+    width: 7cm;
+    text-align: center;
+ }
+
+ .footer-header{
+    width: 5cm;
+    background-color: rgb(178, 164, 196);
+ }
+ /////
+
+
+ /////history
+ .view-history{
+    padding-top: 30;
+    padding-left:60;
+    padding-right:60;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    max-width: 15em;
+    min-width: 9em;
+    background-color: white;
+    border-radius: 100px;
+    padding: 24px;
+ }
+
+ .history-btn{
+    align-self: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color:rgb(52, 20, 126);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+ }
+ .history-btn:hover {
+    align-self: center;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgb(122, 113, 155);
+    transition: 250ms;
+  }
+   
+  .history-btn span {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease-out;
+  }
+   
+  .history-btn:hover span {
+
+    font-size: 1.7rem;
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+
