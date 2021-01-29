@@ -19,11 +19,13 @@ class App extends React.Component {
     } else {
       l = true;
     }
-    if(a==='undefined') {
+    if(a==='undefined'||a==='false') {
       a = false;
-    } 
+    } else {
+      a = true;
+    }
     this.state = {
-      loggedIn: true,
+      loggedIn: l,
       isAdmin: a,
       token: t
     };
@@ -31,7 +33,8 @@ class App extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogin = () => {
+  handleLogin = (token, admin) => {
+    this.setState({ token: token, isAdmin: admin })
     localStorage.setItem('loggedIn', true);
     this.setState({ loggedIn: true });
   }
@@ -47,9 +50,16 @@ class App extends React.Component {
     return (
       <div className="root-container">
         <Router>
-          <NavbarMain handleLogout={this.handleLogout} loggedIn={this.state.loggedIn} isAdmin={this.state.isAdmin}/>
+          <NavbarMain 
+            handleLogout={this.handleLogout} 
+            loggedIn={this.state.loggedIn} 
+            isAdmin={this.state.isAdmin}/>
           <div className="main-container">
-            <Main loggedIn={this.state.loggedIn} handleLogin={this.handleLogin}/>
+            <Main 
+              token={this.state.token}
+              isAdmin={this.state.isAdmin}
+              loggedIn={this.state.loggedIn} 
+              handleLogin={this.handleLogin}/>
           </div>
         </Router>
       </div>

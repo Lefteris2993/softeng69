@@ -12,7 +12,9 @@ class Login extends React.Component {
       username: '',
       password: '',
       errors: [],
-      redirect: false
+      redirect: false,
+      token: null,
+      isAdmin: null
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,6 +57,11 @@ class Login extends React.Component {
     this.clearValidationErr("password");
   }
 
+  //handleChange (event) {
+  //    this.setState({[event.target.name]: event.target.value});
+  //    this.clearValidationErr(event.target.name);
+  //}
+
   handleSubmit(event) {
     if (this.state.username === "") {
       this.showValidationErr("username", "Username Cannot be empty!");
@@ -76,7 +83,9 @@ class Login extends React.Component {
         console.log(reply.data);
         localStorage.setItem('token', reply.data.token);
         localStorage.setItem('isAdmin', reply.data.isAdmin);
-        this.setState({ redirect: true });
+        this.setState({ redirect: true, token: reply.data.token, isAdmin: reply.data.isAdmin });
+      }).catch(err => {
+        console.log(err);//need more 
       })
     }
     event.preventDefault();
@@ -84,7 +93,7 @@ class Login extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      this.props.handleLogin()
+      this.props.handleLogin(this.state.token, this.state.isAdmin)
     }
   }
 
@@ -136,8 +145,10 @@ class Login extends React.Component {
           </small>
         </div>
         <button
-          type="submit"
-          className="login-btn">Login</button>
+          type="button"
+          className="login-btn"
+          onClick={this
+            .handleSubmit}>Login</button>
         {this.renderRedirect()}
         </form>
       </div>

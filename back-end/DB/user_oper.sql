@@ -14,7 +14,7 @@ END; $$;
 
 --------------------------------
 
-CREATE OR REPLACE FUNCTION public.usermod(uname TEXT, passw TEXT, mail TEXT, admin BOOLEAN, t TEXT) RETURNS VOID
+CREATE OR REPLACE FUNCTION public.usermod(uname TEXT, passw TEXT, t TEXT) RETURNS VOID
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -26,10 +26,10 @@ BEGIN
     END IF;
     IF should_update IS NULL THEN
         INSERT INTO users(id, username, password, email, isAdmin) 
-            VALUES (nextval('users_seq'), uname, passw, mail, admin);
+            VALUES (nextval('users_seq'), uname, passw, NULL, false);
         RETURN;
     END IF;
-        UPDATE users SET username=uname, password=passw, email=mail, isAdmin=admin WHERE users.username=uname;
+        UPDATE users SET username=uname, password=passw WHERE users.username=uname;
     RETURN;
 END$$;
 

@@ -18,7 +18,8 @@ router.route('/').post((req, res) => {
             errorHandler(err, res);
         } else {
             res.status(200).json({ 
-                token: reply.rows[0]['token']
+                token: reply.rows[0]['token'],
+                isAdmin: reply.rows[0]['isadmin']
             });
         }
     });
