@@ -18,17 +18,23 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-const TestRouter = require('./routes/TestRouter');
 const LoginRouter = require('./routes/login');
 const LogoutRouter = require('./routes/logout');
 const AdminRouter = require('./routes/admin');
 const Checkout = require('./routes/checkout');
+const SessiosPerPoint = require('./routes/sessiosPerPoint');
+const SessiosPerStation = require('./routes/sessiosPerStation');
+const SessiosPerEv = require('./routes/sessiosPerEv');
+const SessiosPerProvider = require('./routes/sessiosPerProvider');
 
-app.use('/test', TestRouter);
 app.use('/evcharge/api/login', LoginRouter);
 app.use('/evcharge/api/logout', LogoutRouter);
 app.use('/evcharge/api/admin', AdminRouter);
 app.use('/evcharge/api/checkout', Checkout);
+app.use('/evcharge/api/sessiosperpoint', SessiosPerPoint);
+app.use('//evcharge/api/sessiosperstation', SessiosPerStation);
+app.use('/evcharge/api/sessiosperev', SessiosPerEv);
+app.use('/evcharge/api/sessiosperprovider', SessiosPerProvider);
 
 
 var httpsServer = https.createServer(options, app);
