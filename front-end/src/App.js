@@ -25,7 +25,7 @@ class App extends React.Component {
       a = true;
     }
     this.state = {
-      loggedIn: l,
+      loggedIn: true, //care here must not be true!
       isAdmin: a,
       token: t
     };
