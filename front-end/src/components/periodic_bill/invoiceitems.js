@@ -10,28 +10,13 @@ class InvoiceItemsTable extends React.Component {
     }
 
     render() {
-        const tabledata = [
-            {
-                "session_id": "1",
-                "date": "3/10/2018",
-                "energy": "657",
-                "money": "20"
-            },
-            {
-                "session_id": "2",
-                "date": "5/11/2018",
-                "energy": "900",
-                "money": "100"
-            },
-            {
-            }
-        ];
+        const tabledata = this.props.dataFromPage;
 
         let session_sum = tabledata.length - 1;
 
         function sum(obj, mode) {
             let sum = 0;
-            if (mode == "energy") {
+            if (mode === "energy") {
                 for (let i = 0; i < obj.length - 1; i++) {
                     sum += parseInt(tabledata[i].energy);
                 }
