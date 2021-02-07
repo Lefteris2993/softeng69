@@ -71,19 +71,18 @@ END; $$;
 
 --------------------------------
 
-CREATE SEQUENCE users_seq 
-    START 2 INCREMENT 2;
-
---------------------------------
-
-CREATE TABLE public.users (
-    id SERIAL PRIMARY KEY,
-    username CHARACTER varying(64) NOT NULL,
-    password CHARACTER varying(64) NOT NULL,
-    email CHARACTER varying(64),
-    isAdmin BOOLEAN,
-    token CHARACTER(32)
-);
-
-INSERT INTO public.users (id, username, password, email, isAdmin, token)
-	VALUES (1, 'team69_admin', 'team69', 'team69@lefto.ml', TRUE, NULL);
+CREATE OR REPLACE FUNCTION public.sessionsforbill(t TEXT) RETURNS TABLE(name text, date date, energy real, money integer)
+    LANGUAGE plpgsql
+        AS $$
+DECLARE
+    _name text := (SELECT users.username FROM users WHERE token=t);
+    _cars varchar(50)[] := (SELECT Vehicles FROM users WHERE token=t);
+    car varchar(50);
+BEGIN
+    FOREACH car IN ARRAY _cars
+    LOOP
+        RETURN QUERY SELECT _name, DATE(Sessions.ConnectionTime), Sessions.kWhDelivered, 42
+                        FROM Sessions
+                        WHERE car=VehicleID and Payment='Periodic';
+    END LOOP;
+END; $$;
